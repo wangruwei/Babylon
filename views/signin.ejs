@@ -1,0 +1,60 @@
+<%- include('layouts/head') %>
+<div class="ui middle aligned center aligned grid">
+    <div class="column w450">
+        <h2 class="ui teal image header">
+            <img src="/images/logo.png" class="image">
+            <div class="content">
+                登录你的帐号
+            </div>
+        </h2>
+        <%- include('layouts/notification') %>
+        <form class="ui large form" method="post" action="/signin.vpage">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="username" placeholder="用户名">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" placeholder="密码">
+                    </div>
+                </div>
+                <button type="submit" class="ui fluid large teal submit button">登录</button>
+            </div>
+
+            <div class="ui error message"></div>
+
+        </form>
+
+        <div class="ui message">
+            还没有帐号? <a href="/signup.vpage">注册</a>
+        </div>
+    </div>
+</div>
+
+<!-- footer -->
+<div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui horizontal inverted small divided link list">
+            <a class="item" target="_blank" href="http://www.17zuoye.com/">一起作业网</a>
+           <!--  <a class="item" target="_blank" href="http://tiku.17zuoye.net/">一起作业题库系统</a>
+            <a class="item" target="_blank" href="http://wiki.17zuoye.net/">一起作业维基系统</a> -->
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    require(['jquery', 'knockout', 'semantic'], function($, ko){
+        var self = this;
+
+        self.text = ko.observable('测试文字');
+
+        ko.applyBindings(self);
+
+        $('.ui.dropdown').dropdown();
+    });
+</script>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "Babylon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mongo": "mongod --dbpath ~/work/mongodb/Babylon",
+    "app": "supervisor --harmony app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "config-lite": "^1.5.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.3.2",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "flash": "^1.1.0",
+    "mongoose": "^4.7.6"
+  }
+}

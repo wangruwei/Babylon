@@ -1,0 +1,36 @@
+<%- include('layouts/head') %>
+<%- include('layouts/nav') %>
+
+<div class="ui main container">
+	<div data-bind="module: palette"></div>
+</div>
+</body>
+<script type="text/javascript">
+    require(['jquery', 'knockout', 'Tools', 'ko-amd'], function($, ko, Tools){
+    	ko.amdTemplateEngine.defaultPath = '/js/apps/';
+    	ko.amdTemplateEngine.defaultSuffix = '.html';
+    	ko.amdTemplateEngine.defaultRequireTextPluginName = 'text';
+
+        var self = this;
+
+        self.data = {};
+
+        self.text = ko.observable('测试文字');
+        self.palette = ko.observable({
+        	name        : Tools.getJS('home', 'main'),
+        	template    : Tools.getTemp('home', 'main'),
+        	data        : {
+        		parent: self,
+        		data  : self.data
+        	},
+        	afterRender : function(){
+        		$(document.body).trigger('pageReady');
+        	}
+        });
+
+        ko.applyBindings(self);
+
+        $('.ui.dropdown').dropdown();
+    });
+</script>
+</html>
