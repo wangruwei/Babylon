@@ -10,10 +10,11 @@ module.exports = (app) => {
 		});
 	};
 	app.get('/', (req, res, next) => {
-		res.redirect('/welcome.vpage');
+		res.redirect('/home.vpage');
 	});
 
 	app.use('/home.vpage', require('./home'));
+	app.use('/markdown', require('./markdown'));
 	app.use('/', require('./auth'));
 
 	app.use(function(req, res) {
