@@ -1,11 +1,13 @@
+const pkg = require('../package');
+
 module.exports = {
-	name       : 'Babylon',
+	name       : `${pkg.name}`,
 	port       : 3000,
 	session    : {
-		name   : 'Babylon',
-		secret : 'Babylon',
+		name   : `${pkg.name}`,
+		secret : `${pkg.name}`,
 		maxAge : 24 * 3600 * 60 * 1000
 	},
-	mongodb    : 'mongodb://localhost:27017/Babylon',
+	mongodb    : `mongodb://localhost:27017/${pkg.name}`,
 	test       : true
 };

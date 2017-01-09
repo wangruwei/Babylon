@@ -21,19 +21,17 @@ app.use(session({
 	cookie     : {
 		maxAge : config.session.maxAge
 	},
-	store      : new MongoStore({ // 将session存储到mongodb
+	store      : new MongoStore({
 		url    : config.mongodb
 	})
 }));
 app.use(flash());
 
-// 设置模板全局常亮
 app.locals.blog = {
 	title       : pkg.name,
 	description : pkg.description
 };
 
-// 添加模板必须的三个变量
 app.use((req, res, next) => {
 	res.locals.user    = req.session.user;
 	res.locals.success = req.flash('success').toString();
