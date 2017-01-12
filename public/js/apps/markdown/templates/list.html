@@ -9,52 +9,31 @@
     <div class="ui form">
         <div class="inline fields">
             <div class="field">
-                <select class="ui dropdown">
-                    <option value="nickName">老师名字</option>
-                    <option value="email">邮箱</option>
-                    <option value="mobile">手机</option>
-                    <option value="skype">企业QQ</option>
-                    <option value="ID">老师ID</option>
-                </select>
+                <label style="width:80px;text-align:right">作者:</label>
             </div>
             <div class="field">
                 <input type="text">
             </div>
-            <div class="two wide field">
-                <select class="ui dropdown">
-                    <option value="N">全部</option>
-                    <option value="M">男</option>
-                    <option value="F">女</option>
-                </select>
-            </div>
-            <div class="two wide field">
-                <select class="ui dropdown">
-                    <option value="0">全部</option>
-                    <option value="8">未激活</option>
-                    <option value="9">已注册</option>
-                    <option value="4">审核中</option>
-                    <option value="5">面试</option>
-                    <option value="6">培训</option>
-                    <option value="7">签约</option>
-                    <option value="1">正常</option>
-                    <option value="2">禁用</option>
-                    <option value="3">解聘</option>
-                </select>
+            <div class="field">
+                <label style="width:80px;text-align:right">类型:</label>
             </div>
             <div class="field">
-                <label style="width:80px;text-align:right">操作时间:</label>
-            </div>
-            <div class="two wide field">
                 <input type="text">
             </div>
-            <div class="two wide field">
-                <input type="text">
+            <div class="four wide field">
+                <label></label>
             </div>
-            <div class="three wide field">
-                <button style="width:100px" class="ui mini primary button" type="button">
+            <div class="two wide field">
+                <a href="#/edit" class="ui mini teal button">
+                    <i class="add icon"></i>
+                    添加
+                </a>
+            </div>
+            <div class="two wide field">
+                <a href="javascript: void(0);" class="ui mini primary button">
                 	<i class="search icon"></i>
                 	搜索
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -62,71 +41,18 @@
 
 <div class="ui grid">
     <div class="sixteen wide column" style="overflow:hidden">
-        <table class="ui break celled table">
-            <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>老师ID</th>
-                    <th>邮箱</th>
-                    <th>姓名</th>
-                    <th>昵称</th>
-                    <th style="width:50px">性别</th>
-                    <th>企业QQ</th>
-                    <th style="width:155px">操作时间</th>
-                    <th>账号状态</th>
-                    <th style="width:105px">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>11534</td>
-                    <td>
-                        <button class="ui mini green icon button" type="button"><i class="search icon"></i></button>
-                    </td>
-                    <td>Glenda Graham, NA</td>
-                    <td>Glenda</td>
-                    <td>女</td>
-                    <td>
-                        <button class="ui mini green icon button" type="button"><i class="search icon"></i></button>
-                    </td>
-                    <td>2017-01-08 00:07:35</td>
-                    <td>审核中</td>
-                    <td><a class="ui mini primary button"><i class="search icon"></i>查看</a></td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>11534</td>
-                    <td>
-                        <button class="ui mini green icon button" type="button"><i class="search icon"></i></button>
-                    </td>
-                    <td>Glenda Graham, NA</td>
-                    <td>Glenda</td>
-                    <td>女</td>
-                    <td>
-                        <button class="ui mini green icon button" type="button"><i class="search icon"></i></button>
-                    </td>
-                    <td>2017-01-08 00:07:35</td>
-                    <td>审核中</td>
-                    <td><a class="ui mini primary button"><i class="search icon"></i>查看</a></td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>11534</td>
-                    <td>
-                        <button class="ui mini green icon button" type="button"><i class="search icon"></i></button>
-                    </td>
-                    <td>Glenda Graham, NA</td>
-                    <td>Glenda</td>
-                    <td>女</td>
-                    <td>
-                        <button class="ui mini green icon button" type="button"><i class="search icon"></i></button>
-                    </td>
-                    <td>2017-01-08 00:07:35</td>
-                    <td>审核中</td>
-                    <td><a class="ui mini primary button"><i class="search icon"></i>查看</a></td>
-                </tr>
-            </tbody>
-		</table>
+        <div class="ui styled fluid accordion">
+            <!-- ko foreach: docList -->
+            <div class="title" data-bind="css: { 'active': $index() == 0 }"><i class="dropdown icon"></i> What is a dog? </div>
+            <div class="content" data-bind="css: { 'active': $index() == 0 }">
+                <div class="ui segment transition visible">
+                    <h4 class="ui header">A header</h4>
+                    <p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
+                    <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
+                    <p>Eu quo homero blandit intellegebat. Incorrupte consequuntur mei id. Mei ut facer dolores adolescens, no illum aperiri quo, usu odio brute at. Qui te porro electram, ea dico facete utroque quo. Populo quodsi te eam, wisi everti eos ex, eum elitr altera utamur at. Quodsi convenire mnesarchum eu per, quas minimum postulant per id.</p>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
 	</div>
 </div>

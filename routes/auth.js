@@ -7,11 +7,11 @@ let UserDao       = require('../models/UserModel');
 
 router.get('/index.vpage', checkNotLogin, (req, res, next) => {
 	return res.render('index', {
-		appName  : 'auth',
-		appUrl   : req.url,
-		params   : JSON.stringify({
-			test : true
-		})
+		params   : {
+			appName : 'auth',
+			appUrl  : req.url,
+			test    : true
+		}
 	});
 });
 

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><%= appName %></title>
+    <title><%= params.appName %></title>
     <%- include('./links/link') %>
     <%- include('./scripts/script') %>
 </head>
 <body>
-    <% if(appName != 'auth'){ %>
+    <% if(params.appName != 'auth'){ %>
         <%- include('./layouts/nav') %>
     <% } %>
     <div class="ui main container">
@@ -21,8 +21,8 @@
         ko.amdTemplateEngine.defaultRequireTextPluginName = 'text';
 
         var self = Super.call({}, { parent: {}, data: params });
-        self.data.getJS   = Tools.getJS('<%= appName %>');
-        self.data.getTemp = Tools.getTemp('<%= appName %>');
+        self.data.getJS   = Tools.getJS('<%= params.appName %>');
+        self.data.getTemp = Tools.getTemp('<%= params.appName %>');
 
         self.text = ko.observable('测试文字');
         self.palette({

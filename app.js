@@ -7,9 +7,11 @@ const MongoStore = require('connect-mongo')(session);
 const ejs        = require('ejs');
 const path       = require('path');
 const bodyParser = require('body-parser');
-const pkg        = require('./package');
-let routes       = require('./routes');
+const marked	 = require('marked');
 
+const pkg        = require('./package');
+
+let routes       = require('./routes');
 let app = express();
 
 app.set('views', path.join(__dirname, 'views'));

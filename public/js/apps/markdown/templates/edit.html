@@ -1,0 +1,23 @@
+<div class="ui breadcrumb">
+	<div class="section">
+		<i class="disabled folder icon"></i>
+		<a href="/markdown/index.vpage">markdown</a>
+	</div>
+	<i class="right chevron icon divider"></i>
+	<div class="section">
+		<i class="inverted circular teal folder icon"></i>
+		edit
+	</div>
+</div>
+
+<form class="ui form segment" method="post" action="/posts">
+    <div class="field required">
+        <label>标题</label>
+        <input type="text" data-bind="value: title, valueUpdate: 'keyup'">
+    </div>
+    <div class="field required">
+        <label>内容</label>
+        <textarea rows="20" data-bind="value: content, valueUpdate: 'keyup'"></textarea>
+    </div>
+    <a class="teal ui button" data-bind="click: edit">发布</a>
+</form>

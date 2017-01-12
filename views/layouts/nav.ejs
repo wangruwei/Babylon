@@ -1,7 +1,7 @@
 <div class="ui inverted menu topnav">
     <div class="ui container">
     	<div class="header item">欢迎 <%= user.username %></div>
-    	<a onclick="window.location.href = '/markdown/index.vpage'" class="item <% if(appName == 'markdown') { %>active<% } %>">Markdown</a>
+    	<a onclick="window.location.href = '/markdown/index.vpage'" class="item <% if(params.appName == 'markdown') { %>active<% } %>">Markdown</a>
     	<a class="item">Todo List</a>
     	<div class="ui dropdown item" tabindex="0">
     	    promotion
