@@ -14,8 +14,9 @@ module.exports = (app) => {
 	});
 
 	app.use('/home.vpage', require('./home'));
-	app.use('/markdown', require('./markdown'));
-	app.use('/', require('./auth'));
+	app.use('/markdown',   require('./markdown'));
+	app.use('/promotion',  require('./promotion'));
+	app.use('/',           require('./auth'));
 
 	app.use(function(req, res) {
 	    if (!res.headersSent) {
