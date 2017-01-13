@@ -22,7 +22,6 @@ requirejs.config({
     shim: {
     	'semantic'  : ['jquery'],
     	'ko-amd'    : ['knockout', 'text'],
-        'highlight' : ['css!highlight-css'],
         'sweet'     : ['css!sweet-css']
     },
     map: {

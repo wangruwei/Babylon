@@ -9,28 +9,28 @@
     <div class="ui form">
         <div class="inline fields">
             <div class="field">
-                <label style="width:80px;text-align:right">作者:</label>
+                <label style="width:80px;text-align:right">标题:</label>
             </div>
             <div class="field">
-                <input type="text">
+                <input type="text" data-bind="value: title, valueUpdate: 'keyup'">
             </div>
-            <div class="field">
+            <!-- <div class="field">
                 <label style="width:80px;text-align:right">类型:</label>
             </div>
             <div class="field">
                 <input type="text">
-            </div>
+            </div> -->
             <div class="four wide field">
                 <label></label>
             </div>
             <div class="two wide field">
-                <a href="#/edit" class="ui mini teal button">
+                <a href="#/edit/add" class="ui mini teal button">
                     <i class="add icon"></i>
                     添加
                 </a>
             </div>
             <div class="two wide field">
-                <a href="javascript: void(0);" class="ui mini primary button">
+                <a href="javascript: void(0);" class="ui mini primary button" data-bind="click: search">
                 	<i class="search icon"></i>
                 	搜索
                 </a>
@@ -42,16 +42,21 @@
 <div class="ui grid">
     <div class="sixteen wide column" style="overflow:hidden">
         <div class="ui styled fluid accordion">
-            <!-- ko foreach: docList -->
-            <div class="title" data-bind="css: { 'active': $index() == 0 }"><i class="dropdown icon"></i> What is a dog? </div>
-            <div class="content" data-bind="css: { 'active': $index() == 0 }">
-                <div class="ui segment transition visible">
-                    <h4 class="ui header">A header</h4>
-                    <p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
-                    <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
-                    <p>Eu quo homero blandit intellegebat. Incorrupte consequuntur mei id. Mei ut facer dolores adolescens, no illum aperiri quo, usu odio brute at. Qui te porro electram, ea dico facete utroque quo. Populo quodsi te eam, wisi everti eos ex, eum elitr altera utamur at. Quodsi convenire mnesarchum eu per, quas minimum postulant per id.</p>
-                </div>
+            <!-- ko if: markdownList().length == 0 -->
+            <div class="ui error message"><div class="header">没有记录？什么情况？</div><ul class="list"><li>您可以试着更改下条件，再次搜索</li><li>如果查询条件没有问题，那确实没有对应业务数据</li></ul></div>
+            <!-- /ko -->
+            <!-- ko if: markdownList().length != 0 -->
+            <!-- ko foreach: markdownList -->
+            <div class="title" data-bind="css: { 'active': $index() == 0 }">
+                <i class="dropdown icon"></i>
+                <span data-bind="text: title" style="display: inline-block; width: 90%;"></span>
+                <a href="javascript: void(0);" data-bind="attr: { 'href': '#/edit/' + _id }">编辑</a>
+                <a class="delete_btn" href="javascript: void(0);" data-bind="click: function(e){ $parent.delete($data); };">删除</a>
             </div>
+            <div class="content" data-bind="css: { 'active': $index() == 0 }">
+                <div class="ui segment transition visible" data-bind="html: content"></div>
+            </div>
+            <!-- /ko -->
             <!-- /ko -->
         </div>
 	</div>

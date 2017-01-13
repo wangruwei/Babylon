@@ -3,9 +3,12 @@ define(['knockout', 'Super', 'sammy', 'Tools'], function (ko, Super, Sammy, Tool
     return function (context) {
         var self = Super.call(this, context);
 
+        self.markdownList = ko.observableArray(self.data.markdownList);
+
         Sammy(function(){
-            this.get(/\#\/([^/]+)/, function(){
+            this.get(/\#\/([^/]+)\/([^/]+)/, function(){
                 var module = this.params.splat[0];
+                var id = this.params.splat[1];
 
                 self.palette({
                     name        : self.data.getJS(module),
@@ -13,7 +16,8 @@ define(['knockout', 'Super', 'sammy', 'Tools'], function (ko, Super, Sammy, Tool
                     data        : {
                         parent  : self,
                         data    : self.data,
-                        module  : module
+                        module  : module,
+                        id      : id
                     },
                     afterRender : function(){
                         $(document.body).trigger('pageReady');
@@ -22,7 +26,7 @@ define(['knockout', 'Super', 'sammy', 'Tools'], function (ko, Super, Sammy, Tool
             });
 
             this.get(self.data.appUrl, function(){
-                this.app.runRoute('get', '#/list');
+                this.app.runRoute('get', '#/list/0');
             });
         });
 

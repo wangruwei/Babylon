@@ -13,6 +13,9 @@
     <div class="ui main container">
         <div data-bind="module: palette"></div>
     </div>
+    <div class="loading-wrapper" id="loading-wrapper" data-bind="visible: loading()">
+        <div class="loader" id="loader"></div>
+    </div>
 </body>
 <script type="text/javascript">
     require(['jquery', 'knockout', 'Tools', 'Super', 'ko-amd'], function($, ko, Tools, Super){
@@ -23,6 +26,8 @@
         var self = Super.call({}, { parent: {}, data: params });
         self.data.getJS   = Tools.getJS('<%= params.appName %>');
         self.data.getTemp = Tools.getTemp('<%= params.appName %>');
+
+        self.loading = ko.observable(false);
 
         self.text = ko.observable('测试文字');
         self.palette({
