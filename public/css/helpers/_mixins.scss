@@ -1,0 +1,77 @@
+@charset "UTF-8";
+@mixin opacity($opacity:30) {
+  filter: alpha(opacity=$opacity);
+  -ms-filter: "alpha(opacity=$opacity)";
+  opacity: $opacity / 100;
+}
+
+// triangle
+@mixin triangle($direction, $size, $borderColor ) {
+  content:"";
+  height: 0;
+  width: 0;
+
+  @if $direction == top {
+    border-bottom:$size solid $borderColor;
+    border-left:$size dashed transparent;
+    border-right:$size dashed transparent;
+  }
+  @else if $direction == right {
+    border-left:$size solid $borderColor;
+    border-top:$size dashed transparent;
+    border-bottom:$size dashed transparent;
+  }
+  @else if $direction == bottom {
+    border-top:$size solid $borderColor;
+    border-left:$size dashed transparent;
+    border-right:$size dashed transparent;
+  }
+  @else if $direction == left {
+    border-right:$size solid $borderColor;
+    border-top:$size dashed transparent;
+    border-bottom:$size dashed transparent;
+  }
+}
+//shape
+@mixin circle($width, $border) {
+    width: #{$width}px;
+    height: #{$width}px;
+    border: #{$border}px solid;
+    border-radius: #{(($width+$border*2)/2)}px;
+}
+//icon
+@mixin icon($width, $url) {
+    display: inline-block;
+    width: #{$width}px;
+    height: #{$width}px;
+    background: url(#{$img}#{$url}.png);
+    position: absolute;
+    top: 50%;
+    margin-top: #{-($width)/2}px;
+}
+//button
+@mixin btn($width, $height, $border, $bgColor, $color) {
+    display: inline-block;
+    cursor: pointer;
+    width: #{$width}px;
+	height: #{$height}px;
+    border: #{$border}px solid #dee3e9;
+	background-color: $bgColor;
+	color: $color;
+	border-radius: #{(($height+$border*2)/2)}px;
+	text-align: center;
+	line-height: #{$height+$border*2}px;
+}
+@mixin btn-icon($width, $height, $border, $bgColor, $color, $fontSize, $icon) {
+    @include btn($width, $height, $border, $bgColor, $color);
+    font-size: #{$fontSize}px;
+    text-align: right;
+    position: relative;
+	i {
+        @extend .#{$icon};
+        left: #{($height+$border*2)/2}px;
+	}
+    span {
+        margin-right: #{($height+$border*2)/2}px;
+    }
+}
