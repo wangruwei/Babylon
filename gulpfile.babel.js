@@ -4,14 +4,18 @@ import sass       from 'gulp-ruby-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import path       from 'path';
 
+let _config = {
+	sassRoot : path.join(__dirname, 'public/css/')
+};
+
 gulp.task('sass', () => {
-	sass('public/css/**/*.scss', { sourcemap: true })
+	return sass(`${_config.sassRoot}**/*.scss`, { sourcemap: true })
 		.on('error', sass.logError)
 		.pipe(sourcemaps.write('maps', {
 			includeContent: false,
-			sourceRoot: 'public/css/maps'
+			sourceRoot: `${_config.sassRoot}maps`
 		}))
-		.pipe(gulp.dest('public/css'));
+		.pipe(gulp.dest(_config.sassRoot));
 });
 
 gulp.task('default', ['sass']);

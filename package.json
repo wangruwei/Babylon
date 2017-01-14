@@ -28,8 +28,10 @@
     "express-static": "^1.0.3",
     "flash": "^1.1.0",
     "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
     "gulp-ruby-sass": "^2.1.1",
     "gulp-sourcemaps": "^2.4.0",
+    "gulp-watch": "^4.3.11",
     "marked": "^0.3.6",
     "mongoose": "^4.7.6"
   }
