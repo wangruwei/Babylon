@@ -3,9 +3,11 @@ import gulp       from 'gulp';
 import sass       from 'gulp-ruby-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import path       from 'path';
+import md5        from 'gulp-md5-plus';
 
 let _config = {
-	sassRoot : path.join(__dirname, 'public/css/')
+	sassRoot : path.join(__dirname, 'public/css/'),
+	ejsRoot  : path.join(__dirname, 'views/')
 };
 
 gulp.task('sass', () => {
@@ -15,6 +17,12 @@ gulp.task('sass', () => {
 			includeContent: false,
 			sourceRoot: `${_config.sassRoot}maps`
 		}))
+		.pipe(gulp.dest(_config.sassRoot));
+});
+
+gulp.task('md5', () => {
+	return gulp.src(`${_config.sassRoot}*.css`)
+		.pipe(md5(10, `${_config.ejsRoot}**/*.ejs`))
 		.pipe(gulp.dest(_config.sassRoot));
 });
 

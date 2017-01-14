@@ -28,6 +28,7 @@
     "express-static": "^1.0.3",
     "flash": "^1.1.0",
     "gulp": "^3.9.1",
+    "gulp-md5-plus": "^0.2.5",
     "gulp-plumber": "^1.1.0",
     "gulp-ruby-sass": "^2.1.1",
     "gulp-sourcemaps": "^2.4.0",
