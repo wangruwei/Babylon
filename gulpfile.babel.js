@@ -18,4 +18,8 @@ gulp.task('sass', () => {
 		.pipe(gulp.dest(_config.sassRoot));
 });
 
+gulp.task('watch', ['sass'], () => {
+	return gulp.watch(`${_config.sassRoot}**/*.scss`, ['sass']);
+});
+
 gulp.task('default', ['sass']);
