@@ -9,8 +9,7 @@ let _config = {
 };
 
 gulp.task('sass', () => {
-	return gulp.src(`${_config.sassRoot}**/*.scss`)
-		.pipe(sass(, { sourcemap: true }))
+	return sass(`${_config.sassRoot}**/*.scss`, { sourcemap: true })
 		.on('error', sass.logError)
 		.pipe(sourcemaps.write('maps', {
 			includeContent: false,

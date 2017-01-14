@@ -27,7 +27,7 @@
         self.data.getJS   = Tools.getJS('<%= params.appName %>');
         self.data.getTemp = Tools.getTemp('<%= params.appName %>');
 
-        self.loading = ko.observable(false);
+
 
         self.text = ko.observable('测试文字');
         self.palette({
@@ -42,6 +42,7 @@
             }
         });
 
+        self.loading = ko.observable(false);
         ko.applyBindings(self);
 
         $('.ui.dropdown').dropdown();
