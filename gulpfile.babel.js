@@ -5,7 +5,7 @@ import sourcemaps   from 'gulp-sourcemaps';
 import path         from 'path';
 import md5          from 'gulp-md5-plus';
 import rev          from 'gulp-rev';
-import revCollector from 'rev-revCollector';
+import revCollector from 'gulp-rev-collector';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
