@@ -1,10 +1,11 @@
 'use strict';
-import gulp       from 'gulp';
-import sass       from 'gulp-ruby-sass';
-import sourcemaps from 'gulp-sourcemaps';
-import path       from 'path';
-import md5        from 'gulp-md5-plus';
-import rev		  from 'gulp-rev';
+import gulp         from 'gulp';
+import sass         from 'gulp-ruby-sass';
+import sourcemaps   from 'gulp-sourcemaps';
+import path         from 'path';
+import md5          from 'gulp-md5-plus';
+import rev          from 'gulp-rev';
+import revCollector from 'rev-revCollector';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
@@ -28,11 +29,22 @@ gulp.task('md5', () => {
 });
 
 gulp.task('rev', () => {
-	return gulp.src('public/css/**/*.css')
+	return gulp.src(['public/css/**/*.css', 'public/js/**/*.js'], { base: 'public' })
 		.pipe(rev())
-		.pipe(gulp.dest('public/css'))
+		.pipe(gulp.dest('public/'))
 		.pipe(rev.manifest())
-		.pipe(gulp.dest('public/css'));
+		.pipe(gulp.dest('public/js/'))
+		.pipe(revCollector(['public/js/*.json', 'views/**/*.ejs'], {
+			replaceReved: true,
+            dirReplacements: {
+                'css': 'public/css/*.css',
+                '/js/': 'public/js/*.js'
+            }
+		}));
+});
+
+gulp.task('revCollector', () => {
+
 });
 
 gulp.task('watch', ['sass'], () => {
