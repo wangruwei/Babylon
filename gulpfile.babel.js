@@ -33,14 +33,13 @@ gulp.task('rev', () => {
 		.pipe(rev())
 		.pipe(gulp.dest('public/'))
 		.pipe(rev.manifest())
-		.pipe(gulp.dest('public/js/'))
-		.pipe(revCollector(['public/js/*.json', 'views/**/*.ejs'], {
-			replaceReved: true,
-            dirReplacements: {
-                'css': 'public/css/*.css',
-                '/js/': 'public/js/*.js'
-            }
-		}));
+		.pipe(gulp.dest('public/js/'));
+});
+
+gulp.task('collector', ['rev'], () => {
+	return gulp.src(['public/js/*.json', 'views/**/*.ejs'])
+		.pipe(revCollector({ replaceReved: true }))
+		.pipe(gulp.dest('views/'));
 });
 
 gulp.task('revCollector', () => {
