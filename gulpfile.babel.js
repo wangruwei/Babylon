@@ -12,7 +12,11 @@ import rename	    from 'gulp-rename';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
-	ejsRoot  : path.join(__dirname, 'views/')
+	ejsRoot  : path.join(__dirname, 'views/'),
+	toolsRoot: path.join(__dirname, 'public/js/tools/'),
+	libRoot  : path.join(__dirname, 'public/js/lib/'),
+	appsRoot : path.join(__dirname, 'public/js/apps/'),
+	jsRoot   : path.join(__dirname, 'public/js/')
 };
 
 gulp.task('sass', () => {
@@ -26,7 +30,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('rev', () => {
-	return gulp.src(['public/js/apps/**/*.js', 'public/js/*.js', 'public/js/tools/*.js'], { base: 'public' })
+	return gulp.src([`${_config.appsRoot}**/*.js`, `${_config.jsRoot}*.js`, `${_config.toolsRoot}*.js`], {base: 'public'})
 		.pipe(rev())
 		.pipe(uglify())
 		.pipe(rename((path) => {
@@ -35,7 +39,9 @@ gulp.task('rev', () => {
 			}
 		}))
 		.pipe(gulp.dest('public'))
-		.pipe(rev.manifest())
+		.pipe(rev.manifest({
+			merge: true
+		}))
 		.pipe(gulp.dest('public/js'));
 });
 
