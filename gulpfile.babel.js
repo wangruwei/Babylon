@@ -6,6 +6,9 @@ import path         from 'path';
 import md5          from 'gulp-md5-plus';
 import rev          from 'gulp-rev';
 import revCollector from 'gulp-rev-collector';
+// import minifyCss    from 'minify-css';
+import uglify		from 'gulp-uglify';
+import rename	    from 'gulp-rename';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
@@ -22,28 +25,27 @@ gulp.task('sass', () => {
 		.pipe(gulp.dest(_config.sassRoot));
 });
 
-gulp.task('md5', () => {
-	return gulp.src(`${_config.sassRoot}*.css`)
-		.pipe(md5(10, `${_config.ejsRoot}**/*.ejs`))
-		.pipe(gulp.dest(_config.sassRoot));
-});
-
 gulp.task('rev', () => {
-	return gulp.src(['public/css/**/*.css', 'public/js/**/*.js'], { base: 'public' })
+	return gulp.src(['public/js/apps/**/*.js', 'public/js/*.js', 'public/js/tools/*.js'], { base: 'public' })
 		.pipe(rev())
-		.pipe(gulp.dest('public/'))
+		.pipe(uglify())
+		.pipe(rename((path) => {
+			if(path.basename.indexOf('.min') == -1){
+				path.basename += '.min';
+			}
+		}))
+		.pipe(gulp.dest('public'))
 		.pipe(rev.manifest())
-		.pipe(gulp.dest('public/js/'));
+		.pipe(gulp.dest('public/js'));
 });
 
-gulp.task('collector', ['rev'], () => {
+gulp.task('replace', ['rev'], () => {
 	return gulp.src(['public/js/*.json', 'views/**/*.ejs'])
-		.pipe(revCollector({ replaceReved: true }))
+		.pipe(revCollector({
+			replaceReved: true,
+			revSuffix: '-[0-9a-f]{8,10}.min-?'
+		}))
 		.pipe(gulp.dest('views/'));
-});
-
-gulp.task('revCollector', () => {
-
 });
 
 gulp.task('watch', ['sass'], () => {
