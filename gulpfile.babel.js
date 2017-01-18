@@ -9,6 +9,7 @@ import revCollector from 'gulp-rev-collector';
 // import minifyCss    from 'minify-css';
 import uglify		from 'gulp-uglify';
 import rename	    from 'gulp-rename';
+import replace 		from 'gulp-replace';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
@@ -40,8 +41,11 @@ gulp.task('rev', () => {
 		}))
 		.pipe(gulp.dest('public'))
 		.pipe(rev.manifest({
+			path: 'base_config.js',
 			merge: true
 		}))
+		.pipe(replace('{', 'modules = {'))
+		.pipe(replace('}', '};'))
 		.pipe(gulp.dest('public/js'));
 });
 

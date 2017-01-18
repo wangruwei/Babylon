@@ -30,6 +30,7 @@
     "gulp": "^3.9.1",
     "gulp-md5-plus": "^0.2.5",
     "gulp-plumber": "^1.1.0",
+    "gulp-replace": "^0.5.4",
     "gulp-rev-collector": "^1.1.1",
     "gulp-ruby-sass": "^2.1.1",
     "gulp-sourcemaps": "^2.4.0",
