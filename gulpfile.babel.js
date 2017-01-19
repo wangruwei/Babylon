@@ -10,6 +10,8 @@ import revCollector from 'gulp-rev-collector';
 import uglify		from 'gulp-uglify';
 import rename	    from 'gulp-rename';
 import replace 		from 'gulp-replace';
+import concat	    from 'gulp-concat';
+import fs 			from 'fs';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
@@ -41,11 +43,12 @@ gulp.task('rev', () => {
 		}))
 		.pipe(gulp.dest('public'))
 		.pipe(rev.manifest({
-			path: 'base_config.js',
-			merge: true
+			// base  : path.join(process.pwd(), '/public/js/'),
+			// cwd   : path.join(process.pwd(), '/public/js/'),
+			merge : true
 		}))
-		.pipe(replace('{', 'modules = {'))
-		.pipe(replace('}', '};'))
+		// .pipe(replace('{', 'modules = {'))
+		// .pipe(replace('}', '};'))
 		.pipe(gulp.dest('public/js'));
 });
 
@@ -56,6 +59,22 @@ gulp.task('replace', ['rev'], () => {
 			revSuffix: '-[0-9a-f]{8,10}.min-?'
 		}))
 		.pipe(gulp.dest('views/'));
+});
+
+
+
+gulp.task('inject', [], () => {
+	let modules = JSON.parse(fs.readFileSync('public/js/rev-manifest.json', 'utf8'));
+	let configName = modules['js/base_config.js'].split('/')[1];
+		// .pipe(replace('{', 'modules = {'))
+		// .pipe(replace('}', '};'))
+		// .pipe(gulp.dest('public/js/rev-manifest.json'))
+	return gulp.src(['public/js/rev-manifest.json', path.join('public/js', configName)], { base: 'public' })
+		.pipe(concat(configName), { newLine: ';' })
+		// .pipe(uglify())
+		.pipe(replace(/^{/, 'modules = {'))
+		.pipe(replace(/^}/, '};'))
+		.pipe(gulp.dest('public/js/'));
 });
 
 gulp.task('watch', ['sass'], () => {

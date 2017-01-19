@@ -28,6 +28,7 @@
     "express-static": "^1.0.3",
     "flash": "^1.1.0",
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
     "gulp-md5-plus": "^0.2.5",
     "gulp-plumber": "^1.1.0",
     "gulp-replace": "^0.5.4",
