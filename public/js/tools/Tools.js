@@ -1,13 +1,18 @@
 define(['jquery', 'semantic'], function($){
+	var appUrl = 'public/js/apps/';
 	return {
-		getJS   : function(appName, fileName){
+		getJS   : function(appName, test){
 			return function(fileName){
-				return '/js/apps/' + appName + '/modules/' + fileName + '.js'
+				console.log(modules['js/apps/' + appName + '/modules/' + fileName + '.js']);
+				return test ? '/js/apps/' + appName + '/modules/' + fileName + '.js'
+							: '/' + modules['js/apps/' + appName + '/modules/' + fileName + '.js'];
 			};
 		},
-		getTemp : function(appName, fileName){
+		getTemp : function(appName, test){
 			return function(fileName){
-				return appName + '/templates/' + fileName;
+				// console.log(modules['js/apps/' + appName + '/templates/' + fileName + '.html']);
+				return test ? 'js/apps/' + appName + '/templates/' + fileName
+					        : 'js/apps/' + appName + '/templates/' + fileName;
 			};
 		},
 		ajax    : function(options){

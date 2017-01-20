@@ -19,15 +19,14 @@
 </body>
 <script type="text/javascript">
     require(['jquery', 'knockout', 'Tools', 'Super', 'ko-amd'], function($, ko, Tools, Super){
-        ko.amdTemplateEngine.defaultPath = '/js/apps/';
+        ko.amdTemplateEngine.defaultPath = '/';
         ko.amdTemplateEngine.defaultSuffix = '.html';
         ko.amdTemplateEngine.defaultRequireTextPluginName = 'text';
 
         var self = Super.call({}, { parent: {}, data: params });
-        self.data.getJS   = Tools.getJS('<%= params.appName %>');
-        self.data.getTemp = Tools.getTemp('<%= params.appName %>');
 
-
+        self.data.getJS   = Tools.getJS('<%= params.appName %>', false);
+        self.data.getTemp = Tools.getTemp('<%= params.appName %>', false);
 
         self.text = ko.observable('测试文字');
         self.palette({

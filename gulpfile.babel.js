@@ -5,13 +5,14 @@ import sourcemaps   from 'gulp-sourcemaps';
 import path         from 'path';
 import md5          from 'gulp-md5-plus';
 import rev          from 'gulp-rev';
-import revCollector from 'gulp-rev-collector';
-// import minifyCss    from 'minify-css';
+import collector    from 'gulp-rev-collector';
+// import minifyCss from 'minify-css';
 import uglify		from 'gulp-uglify';
-import rename	    from 'gulp-rename';
+import rename       from 'gulp-rename';
 import replace 		from 'gulp-replace';
-import concat	    from 'gulp-concat';
+import concat       from 'gulp-concat';
 import fs 			from 'fs';
+import rCollector 	from 'gulp-requirejs-rev-replace';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
@@ -52,18 +53,26 @@ gulp.task('rev', () => {
 		.pipe(gulp.dest('public/js'));
 });
 
-gulp.task('replace', ['rev'], () => {
+gulp.task('collector', ['rev'], () => {
 	return gulp.src(['public/js/*.json', 'views/**/*.ejs'])
-		.pipe(revCollector({
+		.pipe(collector({
 			replaceReved: true,
 			revSuffix: '-[0-9a-f]{8,10}.min-?'
 		}))
 		.pipe(gulp.dest('views/'));
 });
 
+gulp.task('rCollector', () => {
+	return gulp.src('public/js/base_config.js')
+		.pipe(rCollector({
+			manifest: gulp.src('public/js/rev-manifest.json')
+		}))
+		.pipe(gulp.dest('public/js/base_config1.js'));
+});
 
 
-gulp.task('inject', [], () => {
+
+gulp.task('inject', ['collector'], () => {
 	let modules = JSON.parse(fs.readFileSync('public/js/rev-manifest.json', 'utf8'));
 	let configName = modules['js/base_config.js'].split('/')[1];
 		// .pipe(replace('{', 'modules = {'))
