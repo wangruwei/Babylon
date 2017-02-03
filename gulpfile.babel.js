@@ -71,17 +71,14 @@ gulp.task('rCollector', ['collector'], () => {
 		.pipe(gulp.dest('public/js'));
 });
 
-gulp.task('inject', ['collector'], () => {
+gulp.task('inject', () => {
 	let modules = JSON.parse(fs.readFileSync('public/js/rev-manifest.json', 'utf8'));
 	let configName = modules['js/base_config.js'].split('/')[1];
-		// .pipe(replace('{', 'modules = {'))
-		// .pipe(replace('}', '};'))
-		// .pipe(gulp.dest('public/js/rev-manifest.json'))
-	return gulp.src(['public/js/rev-manifest.json', path.join('public/js', configName)], { base: 'public' })
+	return gulp.src(['public/js/rev-manifest.json', path.join('public/js', configName)])
 		.pipe(concat(configName), { newLine: ';' })
-		// .pipe(uglify())
-		.pipe(replace(/^{/, 'modules = {'))
+		.pipe(replace(/^{/, 'var modules = {'))
 		.pipe(replace(/^}/, '};'))
+		.pipe(uglify())
 		.pipe(gulp.dest('public/js/'));
 });
 
