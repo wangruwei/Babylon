@@ -67,7 +67,7 @@ gulp.task('rCollector', () => {
 		.pipe(rCollector({
 			manifest: gulp.src('public/js/rev-manifest.json')
 		}))
-		.pipe(gulp.dest('public/js/base_config1.js'));
+		.pipe(gulp.dest('public/js'));
 });
 
 
