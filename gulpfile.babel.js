@@ -71,7 +71,7 @@ gulp.task('rCollector', ['collector'], () => {
 		.pipe(gulp.dest('public/js'));
 });
 
-gulp.task('inject', () => {
+gulp.task('inject', ['rCollector'], () => {
 	let modules = JSON.parse(fs.readFileSync('public/js/rev-manifest.json', 'utf8'));
 	let configName = modules['js/base_config.js'].split('/')[1];
 	return gulp.src(['public/js/rev-manifest.json', path.join('public/js', configName)])
@@ -86,6 +86,6 @@ gulp.task('watch', ['sass'], () => {
 	return gulp.watch(`${_config.sassRoot}**/*.scss`, ['sass']);
 });
 
-gulp.task('manifest', ['rCollector']);
+gulp.task('manifest', ['inject']);
 
 gulp.task('default', ['sass']);
