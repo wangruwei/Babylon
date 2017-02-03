@@ -89,4 +89,6 @@ gulp.task('watch', ['sass'], () => {
 	return gulp.watch(`${_config.sassRoot}**/*.scss`, ['sass']);
 });
 
+gulp.task('manifest', ['rCollector']);
+
 gulp.task('default', ['sass']);
