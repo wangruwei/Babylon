@@ -3,9 +3,8 @@ define(['jquery', 'semantic'], function($){
 	return {
 		getJS   : function(appName, test){
 			return function(fileName){
-				console.log(modules['js/apps/' + appName + '/modules/' + fileName + '.js']);
-				return test ? '/js/apps/' + appName + '/modules/' + fileName + '.js'
-							: '/' + modules['js/apps/' + appName + '/modules/' + fileName + '.js'];
+				return test ? 'apps/' + appName + '/modules/' + fileName
+					        : 'apps/' + appName + '/modules/' + fileName;
 			};
 		},
 		getTemp : function(appName, test){
