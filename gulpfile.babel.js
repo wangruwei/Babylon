@@ -62,15 +62,14 @@ gulp.task('collector', ['rev'], () => {
 		.pipe(gulp.dest('views/'));
 });
 
-gulp.task('rCollector', () => {
-	return gulp.src('public/js/base_config.js')
+gulp.task('rCollector', ['collector'], () => {
+	return gulp.src('public/js/base_config-*.js')
 		.pipe(rCollector({
 			manifest: gulp.src('public/js/rev-manifest.json')
 		}))
+		.pipe(uglify())
 		.pipe(gulp.dest('public/js'));
 });
-
-
 
 gulp.task('inject', ['collector'], () => {
 	let modules = JSON.parse(fs.readFileSync('public/js/rev-manifest.json', 'utf8'));
