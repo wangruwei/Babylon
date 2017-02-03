@@ -1,4 +1,5 @@
 const express = require('express');
+const config  = require('config-lite');
 
 let router        = express.Router();
 let checkNotLogin = require('../middlewares/check').checkNotLogin;
@@ -10,7 +11,7 @@ router.get('/index.vpage', checkNotLogin, (req, res, next) => {
 		params   : {
 			appName : 'auth',
 			appUrl  : req.url,
-			test    : true
+			test    : config.test
 		}
 	});
 });

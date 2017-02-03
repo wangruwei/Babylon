@@ -5,12 +5,14 @@ define(['jquery', 'semantic'], function($){
 	return {
 		getJS   : function(appName, test){
 			return function(fileName){
+				var test = test;
 				return test ? '/js/apps/' + appName + '/modules/' + fileName + '.js'
 			        	    : modules['js/apps/' + appName + '/modules/' + fileName + '.js'];
 			};
 		},
 		getTemp : function(appName, test){
 			return function(fileName){
+				var test = test;
 				return test ? 'js/apps/' + appName + '/templates/' + fileName
 					        : 'js/apps/' + appName + '/templates/' + fileName;
 			};

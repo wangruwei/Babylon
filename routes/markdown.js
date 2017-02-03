@@ -1,5 +1,6 @@
 const express = require('express');
-const marked = require('marked');
+const marked  = require('marked');
+const config  = require('config-lite');
 
 let router = express.Router();
 let checkLogin = require('../middlewares/check').checkLogin;
@@ -25,7 +26,7 @@ router.get('/index.vpage', checkLogin, (req, res, next) => {
 			params   : {
 				appName      : 'markdown',
 				appUrl       : `markdown${req.url}`,
-				test         : true,
+				test         : config.test,
 				markdownList : list
 			}
 		});

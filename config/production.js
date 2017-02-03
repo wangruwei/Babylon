@@ -9,6 +9,6 @@ module.exports = {
 		maxAge : 24 * 3600 * 60 * 1000
 	},
 	mongodb    : `mongodb://localhost:27017/${pkg.name}`,
-	env 	   : 'test',
-	test       : true
+	env 	   : 'production',
+	test       : false
 };

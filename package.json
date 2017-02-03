@@ -9,9 +9,10 @@
     ]
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "mongo": "mongod --dbpath ~/work/mongodb/Babylon",
-    "app": "supervisor --harmony app"
+    "test"  : "echo \"Error: no test specified\" && exit 1",
+    "mongo" : "mongod --dbpath ~/work/mongodb/Babylon",
+    "app"   : "supervisor --harmony app",
+    "prod"  : "NODE_ENV=production supervisor --harmony app"
   },
   "author": "",
   "license": "ISC",
