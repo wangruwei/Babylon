@@ -1,5 +1,7 @@
 define(['jquery', 'semantic'], function($){
 	var appUrl = 'public/js/apps/';
+	var test = params.test || false;
+	console.log('test: ', test);
 	return {
 		getJS   : function(appName, test){
 			return function(fileName){

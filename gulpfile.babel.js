@@ -86,6 +86,6 @@ gulp.task('watch', ['sass'], () => {
 	return gulp.watch(`${_config.sassRoot}**/*.scss`, ['sass']);
 });
 
-gulp.task('manifest', ['inject']);
+gulp.task('build', ['inject']);
 
 gulp.task('default', ['sass']);
