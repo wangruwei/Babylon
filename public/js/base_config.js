@@ -11,7 +11,7 @@ requirejs.config({
         'highlight'       : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min',
         'sweet'           : 'https://cdn.jsdelivr.net/sweetalert2/6.3.1/sweetalert2.min',
 
- 		'Tools'           : '/js/tools/Tools',
+        'Tools'           : '/js/tools/Tools',
         'Super'           : '/js/tools/Super',
 
     	// css

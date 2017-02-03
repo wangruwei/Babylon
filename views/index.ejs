@@ -25,8 +25,8 @@
 
         var self = Super.call({}, { parent: {}, data: params });
 
-        self.data.getJS   = Tools.getJS('<%= params.appName %>', '<%= params.test %>');
-        self.data.getTemp = Tools.getTemp('<%= params.appName %>', '<%= params.test %>');
+        self.data.getJS   = Tools.getJS('<%= params.appName %>');
+        self.data.getTemp = Tools.getTemp('<%= params.appName %>');
 
         self.text = ko.observable('测试文字');
         self.palette({

@@ -3,16 +3,16 @@ define(['jquery', 'semantic'], function($){
 	var modules = modules || {};
 
 	return {
-		getJS   : function(appName, test){
+		getJS   : function(appName){
 			return function(fileName){
-				var test = test;
+				var test = params.test;
 				return test ? '/js/apps/' + appName + '/modules/' + fileName + '.js'
-			        	    : modules['js/apps/' + appName + '/modules/' + fileName + '.js'];
+			        	    : '/' + modules['js/apps/' + appName + '/modules/' + fileName + '.js'];
 			};
 		},
-		getTemp : function(appName, test){
+		getTemp : function(appName){
 			return function(fileName){
-				var test = test;
+				var test = params.test;
 				return test ? 'js/apps/' + appName + '/templates/' + fileName
 					        : 'js/apps/' + appName + '/templates/' + fileName;
 			};
