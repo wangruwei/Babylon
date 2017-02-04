@@ -14,6 +14,7 @@ import replace 		from 'gulp-replace';
 import concat       from 'gulp-concat';
 import fs 			from 'fs';
 import rCollector 	from 'gulp-requirejs-rev-replace';
+import clean 		from 'gulp-clean';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
@@ -128,6 +129,25 @@ gulp.task('inject', ['rCollector'], () => {
 		.pipe(replace(/^}/, '};'))
 		.pipe(uglify())
 		.pipe(gulp.dest('public/js/'));
+});
+
+// clean
+gulp.task('clean js', () => {
+	return gulp.src([`${_config.appsRoot}**/*-*.min.js`, `${_config.jsRoot}*-*.min.js`, `${_config.toolsRoot}*-*.min.js`], { read: false })
+		.pipe(clean());
+});
+gulp.task('clean css', () => {
+	return gulp.src(`${_config.sassRoot}**/*-*.min.css`, { read: false })
+		.pipe(clean());
+});
+gulp.task('clean html', () => {
+	return gulp.src('public/js/apps/**/*-*.min.html', { read: false })
+		.pipe(clean());
+});
+
+gulp.task('clean', ['clean js', 'clean css', 'clean html'], () => {
+	return gulp.src('public/js/rev-manifest.json', { read: false })
+		.pipe(clean());
 });
 
 // tasks
