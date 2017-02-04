@@ -23,7 +23,8 @@ let _config = {
 	toolsRoot: path.join(__dirname, 'public/js/tools/'),
 	libRoot  : path.join(__dirname, 'public/js/lib/'),
 	appsRoot : path.join(__dirname, 'public/js/apps/'),
-	jsRoot   : path.join(__dirname, 'public/js/')
+	jsRoot   : path.join(__dirname, 'public/js/'),
+	base_configRoot: path.join(__dirname, 'public/js/')
 };
 
 // compile sass
@@ -145,11 +146,16 @@ gulp.task('clean html', () => {
 		.pipe(clean());
 });
 
-gulp.task('clean', ['clean js', 'clean css', 'clean html'], () => {
+gulp.task('clean collector', () => {
+	return gulp.src(['views/scripts/script.ejs', 'views/links/link.ejs'], { base: 'views' })
+		.pipe(replace(/-[0-9a-f]{8,10}.min-?/g, ''))
+		.pipe(gulp.dest('views'));
+});
+
+gulp.task('clean', ['clean js', 'clean css', 'clean html', 'clean collector'], () => {
 	return gulp.src('public/js/rev-manifest.json', { read: false })
 		.pipe(clean());
 });
-
 // tasks
 gulp.task('watch', ['sass'], () => {
 	return gulp.watch(`${_config.sassRoot}**/*.scss`, ['sass']);
