@@ -12,8 +12,10 @@ define(['jquery', 'semantic'], function($){
 		getTemp : function(appName){
 			return function(fileName){
 				var test = params.test;
+				console.log('js/apps/' + appName + '/templates/' + fileName + '.html');
+				console.log(modules['js/apps/' + appName + '/templates/' + fileName + '.html'].split('.html')[0]);
 				return test ? 'js/apps/' + appName + '/templates/' + fileName
-					        : 'js/apps/' + appName + '/templates/' + fileName;
+					        : modules['js/apps/' + appName + '/templates/' + fileName + '.html'].split('.html')[0];
 			};
 		},
 		ajax    : function(options){
