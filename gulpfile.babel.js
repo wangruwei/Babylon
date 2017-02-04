@@ -6,9 +6,9 @@ import path         from 'path';
 import md5          from 'gulp-md5-plus';
 import rev          from 'gulp-rev';
 import collector    from 'gulp-rev-collector';
-// import minifyCss from 'minify-css';
 import uglify		from 'gulp-uglify';
 import minify 		from 'gulp-clean-css';
+import htmlmin      from 'gulp-htmlmin';
 import rename       from 'gulp-rename';
 import replace 		from 'gulp-replace';
 import concat       from 'gulp-concat';
@@ -36,7 +36,7 @@ gulp.task('sass', () => {
 		.pipe(gulp.dest(_config.sassRoot));
 });
 
-// uglify
+// uglify js
 gulp.task('js', () => {
 	return gulp.src([`${_config.appsRoot}**/*.js`, `${_config.jsRoot}*.js`, `${_config.toolsRoot}*.js`], {base: 'public'})
 		.pipe(rev())
@@ -55,7 +55,7 @@ gulp.task('js', () => {
 		}))
 		.pipe(gulp.dest(''));
 });
-// minify
+// minify css
 gulp.task('css', () => {
 	return gulp.src(`${_config.sassRoot}**/*.css`, { base: 'public' })
 		.pipe(rev())
@@ -75,10 +75,32 @@ gulp.task('css', () => {
 		.pipe(gulp.dest(''));
 });
 
+// minify html
+gulp.task('htmlmin', () => {
+	return gulp.src('public/js/apps/**/*.html', { base: 'public' })
+		.pipe(rev())
+	    .pipe(htmlmin({
+	    	collapseWhitespace: true,
+	    	removeComments: false
+	    }))
+	    .pipe(rename((path) => {
+	    	if(path.basename.indexOf('.min') == -1){
+	    		path.basename += '.min';
+	    	}
+	    }))
+	    .pipe(gulp.dest('public'))
+	    .pipe(rev.manifest({
+	    	path  : 'public/js/rev-manifest.json',
+	    	base  : '',
+	    	cwd   : '',
+	    	merge : true
+	    }))
+	    .pipe(gulp.dest(''));;
+});
 
 
 // mapping
-gulp.task('collector', ['js', 'css'], () => {
+gulp.task('collector', ['js', 'css', 'html'], () => {
 	return gulp.src(['public/js/*.json', 'views/**/*.ejs'])
 		.pipe(collector({
 			replaceReved: true,

@@ -9,9 +9,8 @@
     ]
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "mongo": "mongod --dbpath ~/work/mongodb/Babylon",
     "test": "supervisor --harmony app",
+    "mongo": "mongod --dbpath ~/work/mongodb/Babylon",
     "release": "gulp build && NODE_ENV=production node --harmony app"
   },
   "author": "",
@@ -57,6 +56,7 @@
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.3.2",
     "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-md5-plus": "^0.2.5",
     "gulp-plumber": "^1.1.0",
     "gulp-replace": "^0.5.4",
