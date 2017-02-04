@@ -8,6 +8,7 @@ import rev          from 'gulp-rev';
 import collector    from 'gulp-rev-collector';
 // import minifyCss from 'minify-css';
 import uglify		from 'gulp-uglify';
+import minify 		from 'gulp-clean-css';
 import rename       from 'gulp-rename';
 import replace 		from 'gulp-replace';
 import concat       from 'gulp-concat';
@@ -16,6 +17,7 @@ import rCollector 	from 'gulp-requirejs-rev-replace';
 
 let _config = {
 	sassRoot : path.join(__dirname, 'public/css/'),
+	cssRoot  : path.join(__dirname, 'public/css/'),
 	ejsRoot  : path.join(__dirname, 'views/'),
 	toolsRoot: path.join(__dirname, 'public/js/tools/'),
 	libRoot  : path.join(__dirname, 'public/js/lib/'),
@@ -23,6 +25,7 @@ let _config = {
 	jsRoot   : path.join(__dirname, 'public/js/')
 };
 
+// compile sass
 gulp.task('sass', () => {
 	return sass(`${_config.sassRoot}**/*.scss`, { sourcemap: true })
 		.on('error', sass.logError)
@@ -33,7 +36,8 @@ gulp.task('sass', () => {
 		.pipe(gulp.dest(_config.sassRoot));
 });
 
-gulp.task('rev', () => {
+// uglify
+gulp.task('js', () => {
 	return gulp.src([`${_config.appsRoot}**/*.js`, `${_config.jsRoot}*.js`, `${_config.toolsRoot}*.js`], {base: 'public'})
 		.pipe(rev())
 		.pipe(uglify())
@@ -44,16 +48,37 @@ gulp.task('rev', () => {
 		}))
 		.pipe(gulp.dest('public'))
 		.pipe(rev.manifest({
-			// base  : path.join(process.pwd(), '/public/js/'),
-			// cwd   : path.join(process.pwd(), '/public/js/'),
+			path  : 'public/js/rev-manifest.json',
+			base  : '',
+			cwd   : '',
 			merge : true
 		}))
-		// .pipe(replace('{', 'modules = {'))
-		// .pipe(replace('}', '};'))
-		.pipe(gulp.dest('public/js'));
+		.pipe(gulp.dest(''));
+});
+// minify
+gulp.task('css', () => {
+	return gulp.src(`${_config.sassRoot}**/*.css`, { base: 'public' })
+		.pipe(rev())
+		.pipe(minify())
+		.pipe(rename((path) => {
+			if(path.basename.indexOf('.min') == -1){
+				path.basename += '.min';
+			}
+		}))
+		.pipe(gulp.dest('public'))
+		.pipe(rev.manifest({
+			path  : 'public/js/rev-manifest.json',
+			base  : '',
+			cwd   : '',
+			merge : true
+		}))
+		.pipe(gulp.dest(''));
 });
 
-gulp.task('collector', ['rev'], () => {
+
+
+// mapping
+gulp.task('collector', ['js', 'css'], () => {
 	return gulp.src(['public/js/*.json', 'views/**/*.ejs'])
 		.pipe(collector({
 			replaceReved: true,
@@ -71,6 +96,7 @@ gulp.task('rCollector', ['collector'], () => {
 		.pipe(gulp.dest('public/js'));
 });
 
+// inject config
 gulp.task('inject', ['rCollector'], () => {
 	let modules = JSON.parse(fs.readFileSync('public/js/rev-manifest.json', 'utf8'));
 	let configName = modules['js/base_config.js'].split('/')[1];
@@ -82,6 +108,7 @@ gulp.task('inject', ['rCollector'], () => {
 		.pipe(gulp.dest('public/js/'));
 });
 
+// tasks
 gulp.task('watch', ['sass'], () => {
 	return gulp.watch(`${_config.sassRoot}**/*.scss`, ['sass']);
 });
