@@ -76,7 +76,7 @@ gulp.task('inject', ['rCollector'], () => {
 	let configName = modules['js/base_config.js'].split('/')[1];
 	return gulp.src(['public/js/rev-manifest.json', path.join('public/js', configName)])
 		.pipe(concat(configName), { newLine: ';' })
-		.pipe(replace(/^{/, 'var modules = {'))
+		.pipe(replace(/^{/, 'modules = {'))
 		.pipe(replace(/^}/, '};'))
 		.pipe(uglify())
 		.pipe(gulp.dest('public/js/'));
