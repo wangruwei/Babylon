@@ -100,7 +100,7 @@ gulp.task('htmlmin', () => {
 
 
 // mapping
-gulp.task('collector', ['js', 'css', 'html'], () => {
+gulp.task('collector', ['js', 'css', 'htmlmin'], () => {
 	return gulp.src(['public/js/*.json', 'views/**/*.ejs'])
 		.pipe(collector({
 			replaceReved: true,
