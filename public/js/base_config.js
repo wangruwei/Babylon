@@ -1,7 +1,6 @@
 requirejs.changePath = function(map, key){
     var mapKey = key.substring(1, key.length) + '.js';
     var result = '/' + map[mapKey].substring(0, map[mapKey].length - 3);
-    console.log('result: ', result);
     return result ? result  : key;
 };
 requirejs.config({
