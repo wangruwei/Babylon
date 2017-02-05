@@ -111,17 +111,26 @@ gulp.task('collector', ['js', 'css', 'htmlmin'], () => {
 		.pipe(gulp.dest('views/'));
 });
 
-gulp.task('rCollector', ['collector'], () => {
+// gulp.task('rCollector', ['collector'], () => {
+// 	return gulp.src('public/js/base_config-*.js')
+// 		.pipe(rCollector({
+// 			manifest: gulp.src('public/js/rev-manifest.json')
+// 		}))
+// 		.pipe(uglify())
+// 		.pipe(gulp.dest('public/js'));
+// });
+
+gulp.task('changePath', ['collector'], () => {
 	return gulp.src('public/js/base_config-*.js')
-		.pipe(rCollector({
-			manifest: gulp.src('public/js/rev-manifest.json')
+		.pipe(replace(/\"\/js\/tools\/[\w\-_]+\"/g, (str) => {
+			return `requirejs.changePath(modules, ${str})`;
 		}))
-		.pipe(uglify())
 		.pipe(gulp.dest('public/js'));
 });
 
+
 // inject config
-gulp.task('inject', ['rCollector'], () => {
+gulp.task('inject', ['changePath'], () => {
 	let modules = JSON.parse(fs.readFileSync('public/js/rev-manifest.json', 'utf8'));
 	let configName = modules['js/base_config.js'].split('/')[1];
 	return gulp.src(['public/js/rev-manifest.json', path.join('public/js', configName)])
@@ -131,6 +140,15 @@ gulp.task('inject', ['rCollector'], () => {
 		.pipe(uglify())
 		.pipe(gulp.dest('public/js/'));
 });
+
+// gulp.task('haha', () => {
+// 	// /-[0-9a-f]{8,10}.min-?/g
+// 	return gulp.src('public/js/base_config.js', { base: 'public/js' })
+// 		.pipe(replace(/\'\/js\/tools\/[\w\-_]+\'/g, (str) => {
+// 			return `requirejs.changePath(modules, ${str})`;
+// 		}))
+// 		.pipe(gulp.dest('public/js'));
+// });
 
 // clean
 gulp.task('clean js', () => {
