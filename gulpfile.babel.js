@@ -39,7 +39,7 @@ gulp.task('sass', () => {
 });
 
 // uglify js
-gulp.task('js', () => {
+gulp.task('js', ['clean'], () => {
 	return gulp.src([`${_config.appsRoot}**/*.js`, `${_config.jsRoot}*.js`, `${_config.toolsRoot}*.js`], {base: 'public'})
 		.pipe(rev())
 		.pipe(uglify())
@@ -58,7 +58,7 @@ gulp.task('js', () => {
 		.pipe(gulp.dest(''));
 });
 // minify css
-gulp.task('css', () => {
+gulp.task('css', ['clean'], () => {
 	return gulp.src(`${_config.sassRoot}**/*.css`, { base: 'public' })
 		.pipe(rev())
 		.pipe(minify())
@@ -78,7 +78,7 @@ gulp.task('css', () => {
 });
 
 // minify html
-gulp.task('htmlmin', () => {
+gulp.task('htmlmin', ['clean'], () => {
 	return gulp.src('public/js/apps/**/*.html', { base: 'public' })
 		.pipe(rev())
 	    .pipe(htmlmin({
