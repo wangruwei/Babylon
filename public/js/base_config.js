@@ -14,16 +14,15 @@ requirejs.config({
     	'ko-amd'          : '/js/lib/knockout-amd-helper/build/knockout-amd-helpers.min',
     	'text'            : '/js/lib/text/text',
         'sammy'           : '/js/lib/sammy/sammy-latest.min',
-        'highlight'       : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min',
-        'sweet'           : 'https://cdn.jsdelivr.net/sweetalert2/6.3.1/sweetalert2.min',
+        'highlight'       : '/js/lib/highlight/lib/highlight',
+        'sweet'           : '/js/lib/sweetalert2/dist/sweetalert2.min',
 
         'Tools'           : '/js/tools/Tools',
         'Super'           : '/js/tools/Super',
 
     	// css
-    	// 'semantic-css' : '/js/lib/semantic/semantic'
-        'highlight-css'   : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min',
-        'sweet-css'       : 'https://cdn.jsdelivr.net/sweetalert2/6.3.1/sweetalert2.min'
+        'highlight-css'   : '/js/lib/highlight/lib/styles/default',
+        'sweet-css'       : '/js/lib/sweetalert2/dist/sweetalert2.min'
     },
     shim: {
     	'semantic'  : ['jquery'],
