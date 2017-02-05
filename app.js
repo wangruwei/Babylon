@@ -8,6 +8,7 @@ const ejs        = require('ejs');
 const path       = require('path');
 const bodyParser = require('body-parser');
 const marked	 = require('marked');
+const openurl    = require('openurl');
 
 const pkg        = require('./package');
 
@@ -50,3 +51,5 @@ routes(app);
 app.listen(config.port, () => {
 	console.log(`${config.name} is running at port ${config.port}`);
 });
+
+openurl.open(`http://localhost:${config.port}`);
