@@ -26,6 +26,9 @@ body > .grid {
   bottom: 0;
   width: 100%; }
 
+.column.w450 {
+  width: 450px; }
+
 html, body {
   margin: 0;
   padding: 0;
