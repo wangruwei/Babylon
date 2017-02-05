@@ -13,7 +13,6 @@ import rename       from 'gulp-rename';
 import replace 		from 'gulp-replace';
 import concat       from 'gulp-concat';
 import fs 			from 'fs';
-import rCollector 	from 'gulp-requirejs-rev-replace';
 import clean 		from 'gulp-clean';
 
 let _config = {
@@ -110,15 +109,6 @@ gulp.task('collector', ['js', 'css', 'htmlmin'], () => {
 		}))
 		.pipe(gulp.dest('views/'));
 });
-
-// gulp.task('rCollector', ['collector'], () => {
-// 	return gulp.src('public/js/base_config-*.js')
-// 		.pipe(rCollector({
-// 			manifest: gulp.src('public/js/rev-manifest.json')
-// 		}))
-// 		.pipe(uglify())
-// 		.pipe(gulp.dest('public/js'));
-// });
 
 gulp.task('changePath', ['collector'], () => {
 	return gulp.src('public/js/base_config-*.js')
