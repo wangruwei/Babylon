@@ -39,7 +39,12 @@ gulp.task('sass', () => {
 
 // uglify js
 gulp.task('js', ['clean'], () => {
-	return gulp.src([`${_config.appsRoot}**/*.js`, `${_config.jsRoot}*.js`, `${_config.toolsRoot}*.js`], {base: 'public'})
+	return gulp.src([
+			`${_config.appsRoot}**/*.js`,
+			`${_config.jsRoot}*.js`,
+			`${_config.toolsRoot}*.js`,
+			`${_config.libRoot}*/*/*.js`
+		], {base: 'public'})
 		.pipe(rev())
 		.pipe(uglify())
 		.pipe(rename((path) => {
@@ -142,7 +147,7 @@ gulp.task('inject', ['changePath'], () => {
 
 // clean
 gulp.task('clean js', () => {
-	return gulp.src([`${_config.appsRoot}**/*-*.min.js`, `${_config.jsRoot}*-*.min.js`, `${_config.toolsRoot}*-*.min.js`], { read: false })
+	return gulp.src([`${_config.appsRoot}**/*-*.min.js`, `${_config.jsRoot}*-*.min.js`, `${_config.toolsRoot}*-*.min.js`, `${_config.libRoot}*/*/*-*.min.js`], { read: false })
 		.pipe(clean());
 });
 gulp.task('clean css', () => {

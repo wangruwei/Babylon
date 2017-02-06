@@ -52,4 +52,4 @@ app.listen(config.port, () => {
 	console.log(`${config.name} is running at port ${config.port}`);
 });
 
-openurl.open(`http://localhost:${config.port}`);
+// openurl.open(`http://localhost:${config.port}`);
