@@ -26,8 +26,8 @@ requirejs.config({
         'Super'           : '/js/tools/Super',
 
     	// css
-        'highlight-css'   : '/js/lib/highlight/9.9.0/github',
-        'sweet-css'       : '/js/lib/sweetalert2/6.3.8/sweetalert2'
+        'highlight-css'   : '/js/lib/highlight/9.9.0/github-css',
+        'sweet-css'       : '/js/lib/sweetalert2/6.3.8/sweetalert2-css'
     },
     shim: {
     	'semantic'  : ['jquery'],
