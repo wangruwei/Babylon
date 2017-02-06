@@ -123,16 +123,6 @@ gulp.task('changePath', ['collector'], () => {
 		.pipe(gulp.dest('public/js'));
 });
 
-gulp.task('haha', () => {
-	return gulp.src('public/js/base_config.js')
-		.pipe(replace(/'\/js(\/[^/^'^"]+)+\/[^/^'^"]+',/g, (str) => {
-			console.log('str: ', str);
-			return str;
-			// return `requirejs.changePath(modules, ${str})`;
-		}))
-		.pipe(gulp.dest('public/js'));
-});
-
 
 // inject config
 gulp.task('inject', ['changePath'], () => {
