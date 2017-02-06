@@ -1,7 +1,12 @@
 requirejs.changePath = function(map, key){
-    var revKey = map[key.substring(1, key.length) + '.js'] || map[key.substring(1, key.length) + '.css'];
-    var result = '/' + revKey.substring(0, revKey.lastIndexOf('.'));
-    if(result.indexOf('require-css') != -1)result += '.js';
+    var revKey, result;
+    if(key.indexOf('require-css') == -1){
+        revKey = map[key.substring(1, key.length) + '.js'] || map[key.substring(1, key.length) + '.css'];
+        result = '/' + revKey.substring(0, revKey.lastIndexOf('.'));
+    }else{
+        revKey = map[key.substring(1, key.length)];
+        result = '/' + revKey;
+    }
     return result ? result  : key;
 };
 requirejs.config({
@@ -32,7 +37,7 @@ requirejs.config({
     },
     map: {
         '*': {
-            'css' : '/js/lib/require-css/0.1.8/css'
+            'css' : '/js/lib/require-css/0.1.8/css.js'
         }
     }
 });
