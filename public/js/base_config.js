@@ -31,7 +31,7 @@ requirejs.config({
     },
     map: {
         '*': {
-            'css' : '/js/lib/require-css/css.js'
+            'css' : '/js/lib/require-css/0.1.8/css.js'
         }
     }
 });
