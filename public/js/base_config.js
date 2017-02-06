@@ -13,20 +13,21 @@ requirejs.config({
     	'ko-amd'          : '/js/lib/knockout-amd-helper/build/knockout-amd-helpers.min',
     	'text'            : '/js/lib/text/text',
         'sammy'           : '/js/lib/sammy/sammy-latest.min',
-        'highlight'       : '/js/lib/highlight/lib/highlight',
+        'highlight'       : '/js/lib/highlight/dist/highlight.min',
         'sweet'           : '/js/lib/sweetalert2/dist/sweetalert2.min',
 
         'Tools'           : '/js/tools/Tools',
         'Super'           : '/js/tools/Super',
 
     	// css
-        'highlight-css'   : '/js/lib/highlight/lib/styles/default',
+        'highlight-css'   : '/js/lib/highlight/dist/github',
         'sweet-css'       : '/js/lib/sweetalert2/dist/sweetalert2.min'
     },
     shim: {
     	'semantic'  : ['jquery'],
     	'ko-amd'    : ['knockout', 'text'],
-        'sweet'     : ['css!sweet-css']
+        'sweet'     : ['css!sweet-css'],
+        'highlight' : ['css!highlight-css']
     },
     map: {
         '*': {

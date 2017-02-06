@@ -9,9 +9,9 @@
     ]
   },
   "scripts": {
-    "test": "supervisor --harmony app",
+    "test": "node --harmony app",
     "mongo": "mongod --dbpath ~/work/mongodb/Babylon",
-    "release": "gulp build && NODE_ENV=production supervisor --harmony app"
+    "release": "gulp build && NODE_ENV=production node --harmony app"
   },
   "author": "",
   "license": "ISC",
