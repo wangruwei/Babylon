@@ -63,7 +63,7 @@ gulp.task('js', ['clean'], () => {
 });
 // minify css
 gulp.task('css', ['clean'], () => {
-	return gulp.src(`${_config.sassRoot}**/*.css`, { base: 'public' })
+	return gulp.src([`${_config.sassRoot}**/*.css`, `${_config.libRoot}*/*/*.css`], { base: 'public' })
 		.pipe(rev())
 		.pipe(minify())
 		.pipe(rename((path) => {
@@ -117,8 +117,18 @@ gulp.task('collector', ['js', 'css', 'htmlmin'], () => {
 
 gulp.task('changePath', ['collector'], () => {
 	return gulp.src('public/js/base_config-*.js')
-		.pipe(replace(/\"\/js\/tools\/[\w\-_]+\"/g, (str) => {
+		.pipe(replace(/"\/js(\/[^/^'^"]+)+\/[^/^'^"]+"/g, (str) => {
 			return `requirejs.changePath(modules, ${str})`;
+		}))
+		.pipe(gulp.dest('public/js'));
+});
+
+gulp.task('haha', () => {
+	return gulp.src('public/js/base_config.js')
+		.pipe(replace(/'\/js(\/[^/^'^"]+)+\/[^/^'^"]+',/g, (str) => {
+			console.log('str: ', str);
+			return str;
+			// return `requirejs.changePath(modules, ${str})`;
 		}))
 		.pipe(gulp.dest('public/js'));
 });
@@ -136,22 +146,13 @@ gulp.task('inject', ['changePath'], () => {
 		.pipe(gulp.dest('public/js/'));
 });
 
-// gulp.task('haha', () => {
-// 	// /-[0-9a-f]{8,10}.min-?/g
-// 	return gulp.src('public/js/base_config.js', { base: 'public/js' })
-// 		.pipe(replace(/\'\/js\/tools\/[\w\-_]+\'/g, (str) => {
-// 			return `requirejs.changePath(modules, ${str})`;
-// 		}))
-// 		.pipe(gulp.dest('public/js'));
-// });
-
 // clean
 gulp.task('clean js', () => {
 	return gulp.src([`${_config.appsRoot}**/*-*.min.js`, `${_config.jsRoot}*-*.min.js`, `${_config.toolsRoot}*-*.min.js`, `${_config.libRoot}*/*/*-*.min.js`], { read: false })
 		.pipe(clean());
 });
 gulp.task('clean css', () => {
-	return gulp.src(`${_config.sassRoot}**/*-*.min.css`, { read: false })
+	return gulp.src([`${_config.sassRoot}**/*-*.min.css`, `${_config.libRoot}*/*/*.min.css`], { read: false })
 		.pipe(clean());
 });
 gulp.task('clean html', () => {
