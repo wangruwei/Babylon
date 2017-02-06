@@ -16,14 +16,14 @@ import fs 			from 'fs';
 import clean 		from 'gulp-clean';
 
 let _config = {
-	sassRoot : path.join(__dirname, 'public/css/'),
-	cssRoot  : path.join(__dirname, 'public/css/'),
-	ejsRoot  : path.join(__dirname, 'views/'),
-	toolsRoot: path.join(__dirname, 'public/js/tools/'),
-	libRoot  : path.join(__dirname, 'public/js/lib/'),
-	appsRoot : path.join(__dirname, 'public/js/apps/'),
-	jsRoot   : path.join(__dirname, 'public/js/'),
-	base_configRoot: path.join(__dirname, 'public/js/')
+	sassRoot        : path.join(__dirname, 'public/css/'),
+	cssRoot         : path.join(__dirname, 'public/css/'),
+	ejsRoot         : path.join(__dirname, 'views/'),
+	toolsRoot       : path.join(__dirname, 'public/js/tools/'),
+	libRoot         : path.join(__dirname, 'public/js/lib/'),
+	appsRoot        : path.join(__dirname, 'public/js/apps/'),
+	jsRoot          : path.join(__dirname, 'public/js/'),
+	base_configRoot : path.join(__dirname, 'public/js/')
 };
 
 // compile sass
