@@ -1,9 +1,5 @@
 const pkg = require('../package');
 
-process.argv.forEach((val, index) => {
-	console.log(`${index}: ${val}`);
-});
-
 module.exports = {
 	name       : `${pkg.name}`,
 	port       : 3000,
